@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat1.css">
+    <title>Chat</title>
+</head>
+<body>
+    
+    <div class="wrapper">
+
+        <div class="chat-box">
+            <div class="chat-options">
+                <div class="menu-icon">
+                    <div class="menu-icon-wrap" onclick="toggleMenu()">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div id="menu-right">
+                    <button class="open-popup">Поменять имя</button>
+                </div>
+            </div>
+            <div id="chat-box__body">
+                
+                <template id="tmpl_mes">
+                    <div class="msg-sent ${style}">
+                        <div class="name">
+                            ${name}
+                        </div>
+                        <div class="message">
+                            ${message}
+                        </div>
+                        <div class="date">
+                            ${date}
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+            <div class="chat-box__footer">
+                <textarea required id="msg" type="text" value="" placeholder="Введите сообщение"></textarea>
+
+                <div class="send-btn" onclick="sendMessage()">&#10148;</div>
+            </div>
+        </div>
+        
+         <div class="popupBg">
+            <form class="popup" action="">
+                <img src="cancel.png" alt="" class="close-popup">
+                <label for="">
+                    <input id="msgPopup" type="text" required name="name" value="">
+                    <div class="labelText">
+                        Ваше имя
+                    </div>
+                </label>
+                <button onclick="sendpopup()" type="submit"> Отправить</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
