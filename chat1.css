@@ -115,6 +115,11 @@ html,body {
     font-size: 25px;
     margin: auto 5px 5px 5px;
     cursor: pointer;
+    transition: all 0.5s;
+}
+
+.send-btn:active {
+    scale: 0.8;
 }
 
 textarea {
