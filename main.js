@@ -10,16 +10,20 @@
         //получаем ввод от пользователя
         let msg = document.getElementById('msg').value;
 
-        //отправляем запрос и получаем данные
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET','https://Messenger.stacymch.repl.co/?messeg=' + msg + '&name=' + nameMy,false);
-        xhr.send();
+        //проверка на наличие введенного имени юзера
+        if (nameMy !== '') {
 
-        //используем прописанную ниже функцию отрисовки сообщений из jsonа с сервера
-        renderMessages();
+            //отправляем запрос и получаем данные
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','https://nordic.sierghieipielie.repl.co/?messeg=' + msg + '&name=' + nameMy,false);
+            xhr.send();
 
-        //очистка textarea после отправки сообщения
-        document.getElementById('msg').value = '';
+            //используем прописанную ниже функцию отрисовки сообщений из jsonа с сервера
+            renderMessages();
+
+            //очистка textarea после отправки сообщения
+            document.getElementById('msg').value = '';
+        }
 
     }
 
