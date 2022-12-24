@@ -141,12 +141,13 @@
         }
 
         updateChatHistory();
+
     // Serg обновление сообщений
-    /* setInterval(function() { 
+    setInterval(function() { 
         if (nameMy) {
             renderMessages(); 
         }
-    }, 5000); */
+    }, 5000);
 
 
     //Код jquery для растягивания поля сообщения по высоте контента (только для textarea)
