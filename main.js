@@ -3,19 +3,19 @@
 
         document.getElementById('menu-right').classList.toggle('menu-right-active');
     }
-    
-    //функция отправки сообщений
-    function sendMessage() {
 
         //получаем ввод от пользователя
         let msg = document.getElementById('msg').value;
+
+    //функция отправки сообщений
+    function sendMessage() {
 
         //проверка на наличие введенного имени юзера
         if (nameMy !== '') {
 
             //отправляем запрос и получаем данные
             let xhr = new XMLHttpRequest();
-            xhr.open('GET','https://nordic.sierghieipielie.repl.co/?messeg=' + msg + '&name=' + nameMy,false);
+            xhr.open('GET','https://Messenger.stacymch.repl.co/?messeg=' + msg + '&name=' + nameMy,false);
             xhr.send();
 
             //используем прописанную ниже функцию отрисовки сообщений из jsonа с сервера
