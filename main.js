@@ -1,14 +1,15 @@
+//localStorage.clear();
     //функция вызова меню при клике на три точки сверху
     function toggleMenu() {
 
         document.getElementById('menu-right').classList.toggle('menu-right-active');
     }
 
-        //получаем ввод от пользователя
-        let msg = document.getElementById('msg').value;
-
     //функция отправки сообщений
     function sendMessage() {
+
+        //получаем ввод от пользователя
+        let msg = document.getElementById('msg').value;
 
         //проверка на наличие введенного имени юзера
         if (nameMy !== '') {
@@ -23,6 +24,7 @@
 
             //очистка textarea после отправки сообщения
             document.getElementById('msg').value = '';
+
         }
 
     }
@@ -46,7 +48,7 @@
         //раскодируем данные
         let data = JSON.parse(json); 
         
-        //console.log(data);
+        console.log(data);
 
         //html-контейнер, куда будут отрисованы сообщения
         let container = document.getElementById('chat-box__body');
@@ -84,7 +86,7 @@
     }
 
 
-//Попаб Serg
+//Поп-ап Serg
 
     let popupBg = document.querySelector('.popupBg');
     let popup = document.querySelector('.popup');
@@ -133,6 +135,7 @@
     // Serg сообщения по энтеру    
      document.getElementById('msg').addEventListener('keypress', (e)=> {
                 if (e.key === 'Enter') {
+                    e.preventDefault();
                     sendMessage();
                 }            
         });
@@ -147,11 +150,11 @@
         updateChatHistory();
 
     // Serg обновление сообщений
-    setInterval(function() { 
+    /* setInterval(function() { 
         if (nameMy) {
             renderMessages(); 
         }
-    }, 5000);
+    }, 5000); */
 
 
     //Код jquery для растягивания поля сообщения по высоте контента (только для textarea)
