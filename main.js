@@ -108,19 +108,25 @@
 
         for (let i = 0; i < data.length; i++) {
             
+            //записываем в переменную время (глобальное) из массива на сервере. если без new Date(), получится строка, а нам нужен объект
+            let timeGlobal = new Date(data[i]["date"]);
+            //console.log(timeGlobal); //формат ISO 8601 (Thu Jan 05 2023 00:40:53 GMT+0300 (Москва, стандартное время)
+            //console.log(timeGlobal.toLocaleTimeString()); // формат чч:мм:сс по местному часовому поясу
+
             if (nameMy == data[i]['name']) {
 
                 //отрисовываем "свои" сообщения справа
                 container.innerHTML += document.getElementById('tmpl_mes').innerHTML.replace('${name}', data[i]["name"])
                                                                                     .replace('${message}', data[i]['message'])
-                                                                                    .replace('${date}', data[i]["date"])
+                                                                                    .replace('${date}', timeGlobal.toLocaleTimeString().slice(0,5))
                                                                                     .replace('${style}', 'right');
+
             } else {
                 
                 //отрисовываем "чужие" сообщения слева
                 container.innerHTML += document.getElementById('tmpl_mes').innerHTML.replace('${name}', data[i]["name"])
                                                                                     .replace('${message}', data[i]['message'])
-                                                                                    .replace('${date}', data[i]["date"]);
+                                                                                    .replace('${date}', timeGlobal.toLocaleTimeString().slice(0,5));
             }
         }
 
