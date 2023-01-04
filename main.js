@@ -5,6 +5,54 @@
         document.getElementById('menu-right').classList.toggle('menu-right-active');
     }
 
+
+    //функция для отрисовки тайлов с выбором фона
+    function toggleTiles() {
+
+        //тайлы с фонами появляются/исчезают по клику на "Поменять фон"
+        document.getElementById('tile-container').classList.toggle('tile-active');
+
+        //находим контейнер, куда будут отрисовываться тайлы
+        let container = document.getElementById('tile-container');
+
+        //находим шаблон
+        let tmplTiles = document.getElementById('tmpl-tiles').innerHTML;
+
+        //создаем массив с фонами
+        let data = [
+                    'https://phonoteka.org/uploads/posts/2021-06/1623936347_3-phonoteka_org-p-pattern-dlya-messendzhera-krasivo-3.jpg',
+                    'https://pixelbox.ru/wp-content/uploads/2021/09/background-chat-vk-11.jpg',
+                    'https://pixelbox.ru/wp-content/uploads/2021/09/background-chat-vk-22.jpg',
+                    'https://pixelbox.ru/wp-content/uploads/2021/09/background-chat-vk-70.jpg',
+                    'https://adonius.club/uploads/posts/2022-01/thumbs/1642676059_7-adonius-club-p-top-fonov-stim-8.jpg',
+                    'https://static.wixstatic.com/media/600959_d0449f0c20954906a78a06b9c58d525a~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/600959_d0449f0c20954906a78a06b9c58d525a~mv2.jpg',
+                    'https://phonoteka.org/uploads/posts/2022-02/1644989786_13-phonoteka-org-p-fon-dlya-kompa-krutoi-13.jpg',
+                    'https://catherineasquithgallery.com/uploads/posts/2021-02/1612935646_21-p-fon-krasnii-s-sinim-27.jpg'
+
+        ];
+
+        //очищаем содержимое контейнера
+        container.innerHTML = '';
+
+        //отрисовываем шаблон в нужный контейнер с добавлением фонов из массива
+        for (let i = 0; i < data.length; i++) {
+
+            container.innerHTML += tmplTiles.replace('${background}', data[i])
+                                            .replace('${background}', data[i]);
+        }
+
+    }
+
+
+    //функция смены фона
+    function changeBackground() {
+
+        let chosenBackground = event.target.getAttribute('data-background');
+        document.querySelector('.chat-box').style.backgroundImage = 'url(' + chosenBackground + ')'; 
+
+    }
+
+
     //функция отправки сообщений
     function sendMessage() {
 
@@ -29,6 +77,7 @@
 
     }
 
+
     //шаблон функции отправки пустого гет-запроса
     function sendRequestGET(url) {
         let xhr = new XMLHttpRequest();
@@ -38,6 +87,7 @@
         //отдает данные(результат)
         return xhr.responseText;
     }
+
 
     //функция отрисовки сообщений
     function renderMessages() {
@@ -77,6 +127,7 @@
         scrollToZero();
     
     }
+
 
     //автопрокрутка скроллбара к последнему сообщению
     function scrollToZero() {

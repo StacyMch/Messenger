@@ -21,7 +21,9 @@
                     </div>
                 </div>
                 <div id="menu-right">
-                    <button class="open-popup">Поменять имя</button>
+                    <button class="open open-popup">Поменять имя</button>
+                    <div class="open open-tile" onclick="toggleTiles()">Поменять фон</div>
+                    <div id="tile-container" class="tile-wrap"></div>
                 </div>
             </div>
             <div id="chat-box__body">
@@ -61,6 +63,9 @@
             </form>
         </div>
 
+        <template id="tmpl-tiles">
+                <div class="tile" style="background-image: url('${background}');" data-background="${background}" onclick="changeBackground()"></div>
+        </template>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="main.js"></script>
