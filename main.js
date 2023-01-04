@@ -64,7 +64,7 @@
 
             //отправляем запрос и получаем данные
             let xhr = new XMLHttpRequest();
-            xhr.open('GET','https://Messenger.stacymch.repl.co/?messeg=' + msg + '&name=' + nameMy,false);
+            xhr.open('GET','https://Messenger.stacymch.repl.co/?message=' + msg + '&name=' + nameMy,false);
             xhr.send();
 
             //используем прописанную ниже функцию отрисовки сообщений из jsonа с сервера
@@ -112,14 +112,14 @@
 
                 //отрисовываем "свои" сообщения справа
                 container.innerHTML += document.getElementById('tmpl_mes').innerHTML.replace('${name}', data[i]["name"])
-                                                                                    .replace('${message}', data[i]['messeg'])
+                                                                                    .replace('${message}', data[i]['message'])
                                                                                     .replace('${date}', data[i]["date"])
                                                                                     .replace('${style}', 'right');
             } else {
                 
                 //отрисовываем "чужие" сообщения слева
                 container.innerHTML += document.getElementById('tmpl_mes').innerHTML.replace('${name}', data[i]["name"])
-                                                                                    .replace('${message}', data[i]['messeg'])
+                                                                                    .replace('${message}', data[i]['message'])
                                                                                     .replace('${date}', data[i]["date"]);
             }
         }
@@ -161,12 +161,12 @@
         } 
     })
 
-    document.addEventListener('click', (e)=>{
-        if(e.target == popupBg) {
-            popupBg.classList.remove('active');
-            popup.classList.remove('active');
-        }
-    })
+    // document.addEventListener('click', (e)=>{
+    //     if(e.target == popupBg) {
+    //         popupBg.classList.remove('active');
+    //         popup.classList.remove('active');
+    //     }
+    // })
 
      function sendpopup() {
         let msgPopup = document.getElementById('msgPopup').value;
