@@ -204,7 +204,7 @@ textarea::-webkit-scrollbar-track {
 }
 
 .msg-sent {
-    background: linear-gradient(45deg, rgb(60 174 134), rgb(60 97 174));
+    background: linear-gradient(45deg, rgb(66 106 187), rgb(39 39 39));
     margin: 4px 0;
     border-radius: 20px;
     padding: 10px;
@@ -223,6 +223,7 @@ textarea::-webkit-scrollbar-track {
 /* класс для 'своих' сообщений, которые будут отображаться справа (к диву msg-sent)*/
 .right {
     margin-left: auto;
+    background: linear-gradient(45deg, rgb(60 174 134), rgb(60 97 174));
 }
 
 .date {
