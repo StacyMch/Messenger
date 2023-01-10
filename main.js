@@ -1,4 +1,25 @@
 //localStorage.clear();
+
+    //функция активации кнопки при вводе текста и дезактивании при пустом поле ввода
+    function activateBtn() {
+
+        //получаем ввод от пользователя
+        let msg = document.getElementById('msg').value;
+
+        //записываем кнопку в переменную
+        let btn = document.querySelector('.send-btn');
+
+        if(msg.trim() != '') {
+
+            btn.classList.remove('send-btn_disabled');
+
+        } else {
+
+            btn.classList.add('send-btn_disabled');
+
+        }
+    }
+
     //функция вызова меню при клике на три точки сверху
     function toggleMenu() {
 
@@ -167,12 +188,12 @@
         } 
     })
 
-    // document.addEventListener('click', (e)=>{
-    //     if(e.target == popupBg) {
-    //         popupBg.classList.remove('active');
-    //         popup.classList.remove('active');
-    //     }
-    // })
+    /* document.addEventListener('click', (e)=>{
+        if(e.target == popupBg) {
+            popupBg.classList.remove('active');
+            popup.classList.remove('active');
+        }
+    }) */
 
      function sendpopup() {
         let msgPopup = document.getElementById('msgPopup').value;
@@ -206,12 +227,21 @@
 
         updateChatHistory();
 
+        /* //функция показа новых сообщений других пользователей сразу после их отправки
+        function showNewMessage() { 
+            if (nameMy) {
+                renderMessages(); 
+            }
+        } */
+
     // Serg обновление сообщений
     /* setInterval(function() { 
         if (nameMy) {
             renderMessages(); 
         }
     }, 5000); */
+
+    //console.log(window.pageYOffset);
 
 
     //Код jquery для растягивания поля сообщения по высоте контента (только для textarea)

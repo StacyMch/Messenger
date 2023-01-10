@@ -44,9 +44,9 @@
                 </template>
 
             <div class="chat-box__footer">
-                <textarea required id="msg" type="text" value="" placeholder="Введите сообщение"></textarea>
+                <textarea required id="msg" type="text" value="" placeholder="Введите сообщение" oninput="activateBtn()"></textarea>
 
-                <div class="send-btn" onclick="sendMessage()">&#10148;</div>
+                <div class="send-btn send-btn_disabled" onclick="sendMessage()">&#10148;</div>
             </div>
         </div>
         

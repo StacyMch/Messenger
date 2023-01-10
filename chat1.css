@@ -157,7 +157,7 @@ html,body {
     transition: all 0.5s;
 }
 
-.btn-inactive {
+.send-btn_disabled {
     color: rgb(175, 175, 175);
     pointer-events: none;
 }
