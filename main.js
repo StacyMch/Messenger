@@ -1,6 +1,6 @@
-//localStorage.clear();
+    //localStorage.clear();
 
-    //функция активации кнопки при вводе текста и дезактивании при пустом поле ввода
+//функция активации кнопки при вводе текста и дезактивании при пустом поле ввода
     function activateBtn() {
 
         //получаем ввод от пользователя
@@ -71,6 +71,9 @@
         let chosenBackground = event.target.getAttribute('data-background');
         document.querySelector('.chat-box').style.backgroundImage = 'url(' + chosenBackground + ')'; 
 
+        //при смене фона сохраняем выбранный фон
+        localStorage.setItem('background', chosenBackground);
+
     }
 
 
@@ -119,7 +122,7 @@
         //раскодируем данные
         let data = JSON.parse(json); 
         
-        console.log(data);
+        //console.log(data);
 
         //html-контейнер, куда будут отрисованы сообщения
         let container = document.getElementById('chat-box__body');
@@ -151,17 +154,114 @@
             }
         }
 
-        scrollToZero();
+        //scrollToZero();
+        scrollToZeroWithTimer();
     
     }
 
-
-    //автопрокрутка скроллбара к последнему сообщению
+/*//автопрокрутка скроллбара к последнему сообщению
     function scrollToZero() {
         chatWindow = document.getElementById('chat-box__body'); 
         let xH = chatWindow.scrollHeight; 
+
         chatWindow.scrollTo(0, xH);
+
+        } */
+
+    /*//автопрокрутка скроллбара к последнему сообщению c таймером (нет обнуления при активном скролле юзера)
+    function scrollToZeroWithTimer() {
+        chatWindow = document.getElementById('chat-box__body'); 
+        let xH = chatWindow.scrollHeight; 
+
+        //при активном скролле обнуление скролла будет только через 5 сек после его остановки в любом месте
+        let timer = null;
+            if(timer !== null) {
+                clearTimeout(timer);        
+            }
+            timer = setTimeout(function() {
+                chatWindow.scrollTo(0, xH);
+
+            }, 5000);
+        
+    } */
+
+    //функция автопрокрутки скроллбара к последнему сообщению c таймером (нет обнуления при активном скролле юзера)
+    function scrollToZeroWithTimer() {
+
+        let chatWindow = document.getElementById('chat-box__body'); 
+        let xH = chatWindow.scrollHeight; 
+
+        chatWindow.scrollTo(0, xH);
+
+        console.log('scrollToZero');  
+        
+        //при срабатывании скролла обнуление скролла будет только через 5 сек после его остановки в любом месте
+        let timer = null;
+            
+        //при активном скролле 
+        chatWindow.addEventListener('scroll', function() {
+            
+            //если совершается прокрутка
+            if(timer !== null) {
+
+                //действие функции внутри таймера отменяется, т.е. обнуления скролла не происходит
+                clearTimeout(timer);  
+                console.log('scrollToZero_STOPPED');      
+            }
+
+            //в ином случае скролл обнуляется спустя 5 сек
+            timer = setTimeout(function() {
+
+                chatWindow.scrollTo(0, xH);
+                console.log('scrollToZero_TIMER');
+            }, 5000);
+        }, false);
+
+        
     }
+
+    //функция автопрокрутки скроллбара к последнему сообщению
+    function scrollToZero() {
+        chatWindow = document.getElementById('chat-box__body'); 
+        let xH = chatWindow.scrollHeight; 
+
+        //скролл будет обнулен сразу
+        chatWindow.scrollTo(0, xH);
+
+        console.log('scrollToZero');
+     
+    }
+
+
+    /* //функция Long Polling для проверки поступления на сервер новых сообщений
+    async function longPolling() {
+        let response = await fetch("https://Messenger.stacymch.repl.co/index.php");
+        
+        if (response.status == 502) {
+            // Статус 502 - это таймаут соединения;
+            // возможен, когда соединение ожидало слишком долго
+            // и сервер (или промежуточный прокси) закрыл его
+            // давайте восстановим связь
+            await longPolling();
+        } else if (response.status != 200) {
+            // Какая-то ошибка, покажем её
+            console.log(response.statusText);
+            // Подключимся снова через секунду.
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            await longPolling();
+        } else {
+            if(nameMy) {
+                // Получим и покажем сообщение
+                renderMessages();
+                let message = await response.text();//показывает каждый раз все содержимое data.json
+                console.log(message);
+            }
+            // И снова вызовем longPolling() для получения следующего сообщения
+            await longPolling();
+        }
+        }
+        
+        longPolling(); */
 
 
 //Поп-ап Serg
@@ -221,27 +321,30 @@
         //отрисовка истории чата, если юзер ввел имя
         function updateChatHistory() {
             if (nameMy) {
+
+                //если фон был изменен, подгрузится измененный
+                if(localStorage.getItem('background')) {
+
+                    let chosenBackground = localStorage.getItem('background');
+                    document.querySelector('.chat-box').style.backgroundImage = 'url(' + chosenBackground + ')';
+
+                }
                 renderMessages(); 
+                //scrollToZero();
+                console.log('updateChatHistory');
             }
         }
 
-        updateChatHistory();
+        
+    updateChatHistory(); //единоразово при обновлении страницы
 
-        /* //функция показа новых сообщений других пользователей сразу после их отправки
-        function showNewMessage() { 
-            if (nameMy) {
-                renderMessages(); 
-            }
-        } */
 
-    // Serg обновление сообщений
+    // ПОКАЗЫВАЕТ НОВЫЕ СООБЩЕНИЯ ДРУГИХ ЛЮДЕЙ, НО ПЕРЕБИВАЕТ ПРИОСТАНОВКУ ОБНУЛЕНИЯ ДАЖЕ ПРИ АКТИВНОМ СКРОЛЛЕ. А БЕЗ НЕЕ ВСЕ ПРЕКРАСНО СО СКРОЛЛОМ, НО НЕ ОТОБРАЖАЮТСЯ СООБЩЕНИЯ ДРУГИХ ЮЗЕРОВ БЕЗ ОБНОВЛЕНИЯ СТРАНИЦЫ
     /* setInterval(function() { 
         if (nameMy) {
             renderMessages(); 
         }
     }, 5000); */
-
-    //console.log(window.pageYOffset);
 
 
     //Код jquery для растягивания поля сообщения по высоте контента (только для textarea)
